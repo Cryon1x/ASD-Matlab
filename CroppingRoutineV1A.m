@@ -124,7 +124,7 @@ mkdir('Cropped_Data');
    o = j;
    load(j) % literally loads data file 
    
-   concdata = [SIG.times;SIG.data]; %macro? 
+   concdata = [SIG.times;SIG.data]; %macro?
    events = [SIG.event]; %macro?
    k = 0; m = 0;
    n = extractfield(events, 'type');
@@ -152,12 +152,12 @@ mkdir('Cropped_Data');
    if col > i + 174080-13757
        concdata = concdata(2:end,1:(91715+i)); % actually crop data
        if i > 13757
-           concdata = concdata(2:end,(i-13757):end);
+           concdata = concdata(1:end,(i-13757):end);
        end
    else
        concdata = concdata(2:end,(i-13757):end);
        if i > 13757
-           concdata = concdata(2:end,(i-13757):end);
+           concdata = concdata(1:end,(i-13757):end);
        end
    end
    SIG.data = concdata;  %store as SIG.data
@@ -219,12 +219,6 @@ mkdir('Cropped_Data');
    cd Cropped_Data;
    save(o,'SIG');
    cd ..;
-   end
-      [row, col] = size(concdata);
-   if col > i + 174080
-       concdata = concdata(2:end,i:174080+i); % actually crop data
-   else
-       concdata = concdata(2:end,i:end);
    end
    
  
