@@ -1,4 +1,4 @@
 # ASD-Matlab
-EEG scanner and preprocessor
+EDA, EEG, ECG preprocessor
 
 simple data cropper that works in the matlab environment. 
