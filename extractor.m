@@ -1,14 +1,13 @@
-clear all
 
 
 %             MACROS!
 
 identifier = {'VisCheck', 'Aud', 'Tact', 'Video'}; % What are the file identifiers?
-mkdir('MATLAB files'); % Where should the files be stored? Any name works.
 
 
 folder = uigetdir();
 cd ..;
+mkdir('MATLAB files'); % Where should the files be stored? Any name works.
 
 cd(folder);
 
