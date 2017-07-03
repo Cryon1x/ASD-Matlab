@@ -58,6 +58,6 @@ for i=1:length(appfiles)
     j = 1; col = 0;
     evalc([f '= setfield(' f ',filename,ref1)']);
     end
-    fprintf('File Successfully Processed (%d)\n', i)
+    fprintf('File Successfully Processed (%d of %d)\n', i,length(appfiles));
 end
         

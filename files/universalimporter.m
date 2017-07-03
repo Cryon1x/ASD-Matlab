@@ -3,17 +3,19 @@ identifier = {'.csv','.asc'}; iden_length = length(identifier); fold_listapp = c
 folder = uigetdir; cd(folder); %goto folder
 
 fold_listram = struct2cell(dir(folder)); fold_listram(2:end,:)=[];
-if exist('fold_list', 'var') == 1
-    fold_listram = setdiff(fold_listram,fold_list);
+if exist('foldlist', 'var') == 1
+    foldlist = foldlist(~cellfun('isempty',foldlist));  
+    fold_listram = setdiff(fold_listram,foldlist);
     for i=1:length(fold_listram)
-        fold_list{end+i} = fold_listram{i}; 
+        foldlist{end+i} = fold_listram{i}; 
     end
 else
-    fold_list = fold_listram;
+    foldlist = fold_listram;
 end
 %generate folder list
 
-j = 1;l = 1; m = 1; while j == 1
+j = 1;l = 1;m = 0;
+while j == 1
     file = sprintf('CSV%d',l);
     if exist(file,'var') == 1
         l = l+1;
@@ -34,18 +36,20 @@ for i=1:iden_length
     end
     
     for k=1:length(fold_listapp) %import applicable files
+        m = 0;
         num = fold_listapp{k};
         file = char(fold_listram{num});
-        resultfile = importdata(file);
+        file = fopen(file);
+        resultfile = textscan(file,'%c');
         m = m+1;
         
         if identifier{i} == '.csv' % .csv importer; 
-            fprintf('Importing .csv file (%d)\n',m);
+            fprintf('Importing .csv file (%d of %d)\n',m, length(fold_listapp));
             evalc(['CSV' num2str(k+l-1) '= resultfile']);
             fold_listram{m} = file;
             
         else if identifier{i} == '.asc' %.asc importer
-            fprintf('Importing .asc file (%d)\n',m);
+            fprintf('Importing .asc file (%d of %d)\n',m, length(fold_listapp));
             evalc(['ASC' num2str(k+l-1) '= resultfile']);
             fold_listram{m} = file;
             
@@ -63,15 +67,15 @@ for i=1:iden_length
         end
     end
 end
-
-fold_listram = setdiff(fold_list, fold_listram);
-fold_list = [fold_list, fold_listram];
-fold_list = unique(fold_list); 
-if m == 1
+foldlist = foldlist(~cellfun('isempty',foldlist));  
+fold_listram = setdiff(foldlist, fold_listram);
+foldlist = [foldlist, fold_listram];
+foldlist = unique(foldlist); 
+if m == 0
     msgbox('No new files found!');
 else
     msgbox('Import successful!');
 end
 
-clear file fold_listapp folder i iden_length identifier j k l num resultfile m fold_listram ans
+run declutter.m;
 

@@ -11,5 +11,5 @@ x = who();
                 clear(x{i});
             end
         end
-    clear identify n o q x identifier2 y str1 str2 j i ans col f file filename appfiles k ref ref1 row l m u;
-    e = 0;
+    clear stim z names fstp h_filter mean order SIG h event_elf event_roller fold_listapp button record appfolder resultfile event filename1 filename2 fold_listram fold_size folder identifier keygen keygen2 list num identify n o q x identifier2 y str1 str2 j i ans col f file filename appfiles k ref ref1 row iden_length l m u;
+e = 0;

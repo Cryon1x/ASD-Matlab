@@ -1,0 +1,25 @@
+e = 0;
+while e == 0
+    clear choice;
+    choice = menu('Choose a Function','Import Data','Convert .bdt files to .mat','Crop Vi/Tact/Aud', 'Clear Workspace','Unclutter Workspace','Crop Eyetrack (non','Update Workspace');
+
+    switch choice 
+        case 1
+            run universalimporter.m; % imports CSV, ASC
+        case 2
+            run extractor.m; %takes vischeck, tact, aud, video files and converts .bdt to .mat
+        case 3
+            run matcropper.m; %crops .mat files for vischeck, tact, aud and video files
+        case 4
+            run clrwkspce.m; % clears workspace
+        case 5
+            run declutter.m; % clears workspace except file_list and CSV/ASC files
+        case 6
+            run gsrcropper.m; % crops ASC files (eye tracking)
+        case 7
+            e = 1;
+            clear choice;
+    end
+end
+
+clear e;
